@@ -1,3 +1,4 @@
+/*
 package org.firstinspires.ftc.teamcode.example.kotlin
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
@@ -27,3 +28,5 @@ class AutonomousProgram: NextFTCOpMode(Claw, Lift) {
         firstRoutine()
     }
 }
+
+*/
