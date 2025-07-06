@@ -1,4 +1,6 @@
+/*
 package org.firstinspires.ftc.teamcode.example.kotlin
+
 
 import com.rowanmcalpin.nextftc.core.Subsystem
 import com.rowanmcalpin.nextftc.core.command.Command
@@ -39,3 +41,4 @@ object Lift: Subsystem() {
         motor = MotorEx(name)
     }
 }
+ */
