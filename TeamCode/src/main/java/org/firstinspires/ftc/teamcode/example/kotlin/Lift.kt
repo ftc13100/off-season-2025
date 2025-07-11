@@ -1,4 +1,4 @@
-/*
+
 package org.firstinspires.ftc.teamcode.example.kotlin
 
 
@@ -41,4 +41,3 @@ object Lift: Subsystem() {
         motor = MotorEx(name)
     }
 }
- */
