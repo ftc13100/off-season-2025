@@ -15,7 +15,7 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
 
 
-@TeleOp(name = "NextFTC TeleOp Program Kotlin")
+@TeleOp(name = "NextFTC Main TeleOp")
 class TeleOpProgram: NextFTCOpMode() {
 
     // Change the motor names to suit your robot.
@@ -40,10 +40,14 @@ class TeleOpProgram: NextFTCOpMode() {
         frontRightMotor = MotorEx(frontRightName)
 
         // Change the motor directions to suit your robot.
-        frontLeftMotor.direction = DcMotorSimple.Direction.REVERSE
+        frontLeftMotor.direction = DcMotorSimple.Direction.FORWARD
         backLeftMotor.direction = DcMotorSimple.Direction.REVERSE
         frontRightMotor.direction = DcMotorSimple.Direction.FORWARD
         backRightMotor.direction = DcMotorSimple.Direction.FORWARD
+
+        //
+
+
 
         motors = arrayOf(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor)
     }
