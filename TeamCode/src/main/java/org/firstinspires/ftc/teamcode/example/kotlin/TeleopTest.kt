@@ -17,9 +17,10 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadManager
 import org.firstinspires.ftc.teamcode.subsystems.Claw
+import org.firstinspires.ftc.teamcode.subsystems.Lift
 
 @TeleOp(name = "NextFTC Main TeleOp")
-class TeleOpProgram: NextFTCOpMode(Claw) {
+class TeleOpProgram: NextFTCOpMode(Claw, Lift) {
 
     // Change the motor names to suit your robot.
     val frontLeftName = "leftFront"
@@ -62,8 +63,20 @@ class TeleOpProgram: NextFTCOpMode(Claw) {
         gamepadManager.gamepad1.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
         gamepadManager.gamepad2.a.pressedCommand = {Claw.open}
         gamepadManager.gamepad2.b.pressedCommand = {Claw.close}
+
+        gamepadManager.gamepad2.leftBumper.pressedCommand = {
+            ParallelGroup(
+                Lift.toHigh,
+                Lift.toHigh2
+            )
     }
+        gamepadManager.gamepad2.leftBumper.pressedCommand = {
+            ParallelGroup(
+                Lift.toLow,
+                Lift.toLow2
+            )
+        }
 
 
 
-}
+}}
