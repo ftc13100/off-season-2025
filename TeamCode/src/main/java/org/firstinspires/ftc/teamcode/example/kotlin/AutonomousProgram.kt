@@ -1,6 +1,6 @@
-/*
-package org.firstinspires.ftc.teamcode.example.kotlin
 
+package org.firstinspires.ftc.teamcode.example.kotlin
+/*
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.rowanmcalpin.nextftc.core.command.Command
 import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup
