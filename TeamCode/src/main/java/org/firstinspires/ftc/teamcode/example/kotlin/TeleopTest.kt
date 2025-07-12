@@ -15,6 +15,7 @@ import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup
 import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
+import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadManager
 
 @TeleOp(name = "NextFTC Main TeleOp")
 class TeleOpProgram: NextFTCOpMode() {
@@ -55,5 +56,13 @@ class TeleOpProgram: NextFTCOpMode() {
         driverControlled = MecanumDriverControlled(motors, gamepadManager.gamepad1)
         driverControlled.scalar = 1.0
         driverControlled()
+
+        gamepadManager.gamepad2.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.3 } }
+        gamepadManager.gamepad2.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
+
+
     }
+
+
+
 }
