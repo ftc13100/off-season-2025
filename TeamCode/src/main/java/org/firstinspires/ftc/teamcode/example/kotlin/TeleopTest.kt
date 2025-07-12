@@ -25,21 +25,17 @@ class TeleOpProgram: NextFTCOpMode() {
     val backLeftName = "leftRear"
     val backRightName = "rightRear"
 
-    lateinit var frontLeftMotor: MotorEx
-    lateinit var frontRightMotor: MotorEx
-    lateinit var backLeftMotor: MotorEx
-    lateinit var backRightMotor: MotorEx
+    val frontLeftMotor by lazy { MotorEx(frontLeftName) }
+    val frontRightMotor  by lazy { MotorEx(frontRightName) }
+    val backLeftMotor by lazy { MotorEx(backLeftName) }
+    val backRightMotor by lazy { MotorEx(backRightName) }
 
     lateinit var motors: Array<MotorEx>
 
-    lateinit var driverControlled: Command
+    lateinit var driverControlled: MecanumDriverControlled
+
 
     override fun onInit() {
-        frontLeftMotor = MotorEx(frontLeftName)
-        backLeftMotor = MotorEx(backLeftName)
-        backRightMotor = MotorEx(backRightName)
-        frontRightMotor = MotorEx(frontRightName)
-
         // Change the motor directions to suit your robot.
         frontLeftMotor.direction = DcMotorSimple.Direction.FORWARD
         backLeftMotor.direction = DcMotorSimple.Direction.REVERSE
@@ -57,6 +53,7 @@ class TeleOpProgram: NextFTCOpMode() {
 
     override fun onStartButtonPressed() {
         driverControlled = MecanumDriverControlled(motors, gamepadManager.gamepad1)
+        driverControlled.scalar = 1.0
         driverControlled()
     }
 }
