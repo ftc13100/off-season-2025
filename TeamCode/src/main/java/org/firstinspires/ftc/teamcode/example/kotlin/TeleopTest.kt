@@ -69,14 +69,16 @@ class TeleOpProgram: NextFTCOpMode(Claw, Lift) {
                 Lift.toHigh,
                 Lift.toHigh2
             )
-    }
-        gamepadManager.gamepad2.leftBumper.pressedCommand = {
+        }
+
+        gamepadManager.gamepad2.rightBumper.pressedCommand = {
             ParallelGroup(
                 Lift.toLow,
                 Lift.toLow2
             )
         }
 
-
-
-}}
+        this.telemetry.addData("Position", Lift.motor.currentPosition)
+        this.telemetry.update()
+    }
+}
