@@ -47,5 +47,15 @@ class TeleOpProgram: NextFTCOpMode() {
         driverControlled = MecanumDriverControlled(motors, gamepadManager.gamepad1)
         driverControlled.scalar = 1.0
         driverControlled()
-    }
+
+        gamepadManager.gamepad2.leftBumper.pressedCommand = {
+
+
+
+    
+
+
+
+
+
 }
