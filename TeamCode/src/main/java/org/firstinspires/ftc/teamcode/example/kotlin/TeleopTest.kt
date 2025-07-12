@@ -16,9 +16,10 @@ import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
 import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadManager
+import org.firstinspires.ftc.teamcode.subsystems.Claw
 
 @TeleOp(name = "NextFTC Main TeleOp")
-class TeleOpProgram: NextFTCOpMode() {
+class TeleOpProgram: NextFTCOpMode(Claw) {
 
     // Change the motor names to suit your robot.
     val frontLeftName = "leftFront"
@@ -59,8 +60,8 @@ class TeleOpProgram: NextFTCOpMode() {
 
         gamepadManager.gamepad1.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.5 } }
         gamepadManager.gamepad1.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
-
-
+        gamepadManager.gamepad2.a.pressedCommand = {Claw.open}
+        gamepadManager.gamepad2.b.pressedCommand = {Claw.close}
     }
 
 
