@@ -57,8 +57,8 @@ class TeleOpProgram: NextFTCOpMode() {
         driverControlled.scalar = 1.0
         driverControlled()
 
-        gamepadManager.gamepad2.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.3 } }
-        gamepadManager.gamepad2.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
+        gamepadManager.gamepad1.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.5 } }
+        gamepadManager.gamepad1.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
 
 
     }
