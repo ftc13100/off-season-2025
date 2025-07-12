@@ -1,12 +1,21 @@
 
+import com.rowanmcalpin.nextftc.core.Subsystem
+import com.rowanmcalpin.nextftc.core.command.Command
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand
+import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController
+import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
+import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToPosition
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
-import com.rowanmcalpin.nextftc.core.command.Command
+import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup
+import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup
+import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
+import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadManager
 
 @TeleOp(name = "NextFTC Main TeleOp")
 class TeleOpProgram: NextFTCOpMode() {
@@ -48,13 +57,11 @@ class TeleOpProgram: NextFTCOpMode() {
         driverControlled.scalar = 1.0
         driverControlled()
 
-        gamepadManager.gamepad2.leftBumper.pressedCommand = {
+        gamepadManager.gamepad2.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.3 } }
+        gamepadManager.gamepad2.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
 
 
-
-    
-
-
+    }
 
 
 
