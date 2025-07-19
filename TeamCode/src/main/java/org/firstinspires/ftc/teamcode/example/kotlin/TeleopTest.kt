@@ -52,10 +52,8 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         driverControlled.scalar = 1.0
         driverControlled()
 
-        gamepadManager.gamepad1.y.pressedCommand =
-            { InstantCommand { driverControlled.scalar = 0.5 } }
-        gamepadManager.gamepad1.y.releasedCommand =
-            { InstantCommand { driverControlled.scalar = 1.0 } }
+        gamepadManager.gamepad1.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.5 } }
+        gamepadManager.gamepad1.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
         gamepadManager.gamepad2.a.pressedCommand = { Claw.open }
         gamepadManager.gamepad2.b.pressedCommand = { Claw.close }
 
@@ -70,9 +68,9 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         gamepadManager.gamepad2.dpadDown.releasedCommand = { Slides.toSlideStop }
 
 
-
+    }
         override fun onUpdate() {
             this.telemetry.addData("Position", Arm.armMotor.currentPosition)
             this.telemetry.update()
         }
-    }}
+    }

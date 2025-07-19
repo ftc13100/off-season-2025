@@ -17,9 +17,9 @@ object Slides: Subsystem() {
 
 
     val toSlideHigh: Command
-        get() = SetPower(slides, 0.6, this)
+        get() = SetPower(slides, 0.8, this)
     val toSlideLow: Command
-        get() = SetPower(slides, -0.6, this)
+        get() = SetPower(slides, -0.8, this)
     val toSlideStop: Command
         get() = SetPower(slides, 0.0, this)
 
