@@ -52,28 +52,27 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         driverControlled.scalar = 1.0
         driverControlled()
 
-        gamepadManager.gamepad1.y.pressedCommand = { InstantCommand { driverControlled.scalar = 0.5 } }
-        gamepadManager.gamepad1.y.releasedCommand = { InstantCommand { driverControlled.scalar = 1.0 } }
-        gamepadManager.gamepad2.a.pressedCommand = {Claw.open}
-        gamepadManager.gamepad2.b.pressedCommand = {Claw.close}
+        gamepadManager.gamepad1.y.pressedCommand =
+            { InstantCommand { driverControlled.scalar = 0.5 } }
+        gamepadManager.gamepad1.y.releasedCommand =
+            { InstantCommand { driverControlled.scalar = 1.0 } }
+        gamepadManager.gamepad2.a.pressedCommand = { Claw.open }
+        gamepadManager.gamepad2.b.pressedCommand = { Claw.close }
 
-        gamepadManager.gamepad2.leftBumper.pressedCommand = {Arm.toHigh}
-        gamepadManager.gamepad2.rightBumper.pressedCommand = {Arm.toLow}
-        gamepadManager.gamepad2.rightBumper.releasedCommand = {Arm.toStop}
-        gamepadManager.gamepad2.leftBumper.releasedCommand = {Arm.toStop}
+        gamepadManager.gamepad2.leftBumper.pressedCommand = { Arm.toHigh }
+        gamepadManager.gamepad2.rightBumper.pressedCommand = { Arm.toLow }
+        gamepadManager.gamepad2.rightBumper.releasedCommand = { Arm.toStop }
+        gamepadManager.gamepad2.leftBumper.releasedCommand = { Arm.toStop }
 
-        gamepadManager.gamepad2.dpadDown.pressedCommand = {Slides.toSlideHigh}
-        gamepadManager.gamepad2.dpadUp.pressedCommand = {Slides.toSlideLow}
-        gamepadManager.gamepad2.dpadDown.releasedCommand = {Slides.toSlideStop}
-        gamepadManager.gamepad2.dpadDown.releasedCommand = {Slides.toSlideStop}
-
-
+        gamepadManager.gamepad2.dpadDown.pressedCommand = { Slides.toSlideHigh }
+        gamepadManager.gamepad2.dpadUp.pressedCommand = { Slides.toSlideLow }
+        gamepadManager.gamepad2.dpadDown.releasedCommand = { Slides.toSlideStop }
+        gamepadManager.gamepad2.dpadDown.releasedCommand = { Slides.toSlideStop }
 
 
-    }
 
-    override fun onUpdate() {
-        this.telemetry.addData("Position", Arm.armMotor.currentPosition)
-        this.telemetry.update()
-    }
-}
+        override fun onUpdate() {
+            this.telemetry.addData("Position", Arm.armMotor.currentPosition)
+            this.telemetry.update()
+        }
+    }}
