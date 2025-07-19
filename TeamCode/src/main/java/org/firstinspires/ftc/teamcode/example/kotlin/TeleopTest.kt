@@ -1,14 +1,13 @@
 
-import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
-import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup
+import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
-import org.firstinspires.ftc.teamcode.subsystems.Claw
+import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
 import org.firstinspires.ftc.teamcode.subsystems.Arm
+import org.firstinspires.ftc.teamcode.subsystems.Claw
 import org.firstinspires.ftc.teamcode.subsystems.Slides
 
 @TeleOp(name = "NextFTC Main TeleOp")
@@ -61,10 +60,10 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         gamepadManager.gamepad2.rightBumper.releasedCommand = {Arm.toStop}
         gamepadManager.gamepad2.leftBumper.releasedCommand = {Arm.toStop}
 
-        gamepadManager.gamepad2.dpadLeft.pressedCommand = {Slides.toSlideHigh}
-        gamepadManager.gamepad2.dpadRight.pressedCommand = {Slides.toSlideLow}
-        gamepadManager.gamepad2.dpadLeft.releasedCommand = {Slides.toSlideStop}
-        gamepadManager.gamepad2.dpadRight.releasedCommand = {Slides.toSlideStop}
+        gamepadManager.gamepad2.dpadUp.pressedCommand = { Slides.toSlideHigh }
+        gamepadManager.gamepad2.dpadDown.pressedCommand = { Slides.toSlideLow }
+        gamepadManager.gamepad2.dpadUp.releasedCommand = { Slides.toSlideStop }
+        gamepadManager.gamepad2.dpadDown.releasedCommand = { Slides.toSlideStop }
 
 
 
@@ -72,7 +71,7 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
     }
 
     override fun onUpdate() {
-        this.telemetry.addData("Position", Arm.motor.currentPosition)
+        this.telemetry.addData("Position", Arm.armMotor.currentPosition)
         this.telemetry.update()
     }
 }

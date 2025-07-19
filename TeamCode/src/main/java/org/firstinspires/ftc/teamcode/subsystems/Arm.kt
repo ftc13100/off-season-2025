@@ -1,22 +1,20 @@
 package org.firstinspires.ftc.teamcode.subsystems
 
+import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.rowanmcalpin.nextftc.core.Subsystem
 import com.rowanmcalpin.nextftc.core.command.Command
-import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController
-import com.rowanmcalpin.nextftc.core.control.controllers.feedforward.StaticFeedforward
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorGroup
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToPosition
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower
 
 
 object Arm: Subsystem() {
-    val motor by lazy { MotorEx("leftSlideAxel") }
-    val motor2 by lazy { MotorEx("rightSlideAxel") }
-    val arms by lazy { MotorGroup(motor, motor2) }
+    val armMotor by lazy { MotorEx("leftSlideAxel") }
+    val armMotor2 by lazy { MotorEx("rightSlideAxel") }
+    val arms by lazy { MotorGroup(armMotor, armMotor2) }
 
-    val controller = PIDFController(5.0, 0.0, 0.1, StaticFeedforward(0.0))
+ //   val controller = PIDFController(5.0, 0.0, 0.1, StaticFeedforward(0.0))
 
 
     val toLow: Command
@@ -32,7 +30,9 @@ object Arm: Subsystem() {
 
 
     override fun initialize() {
-        motor2.direction = DcMotorSimple.Direction.REVERSE
+        armMotor2.direction = DcMotorSimple.Direction.REVERSE
+        armMotor2.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        armMotor.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
     }
 
 
