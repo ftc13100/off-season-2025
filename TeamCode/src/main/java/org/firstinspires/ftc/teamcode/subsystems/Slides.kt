@@ -1,7 +1,6 @@
 package org.firstinspires.ftc.teamcode.subsystems
 
 import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.rowanmcalpin.nextftc.core.Subsystem
 import com.rowanmcalpin.nextftc.core.command.Command
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
@@ -10,10 +9,9 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower
 
 
 object Slides: Subsystem() {
-    val slide by lazy { MotorEx("leftSlideString") }
+    val slide by lazy { MotorEx("leftSlideString").reverse() }
     val slide2 by lazy { MotorEx("rightSlideString") }
     val slides by lazy { MotorGroup(slide, slide2) }
-
 
 
     val toSlideHigh: Command
@@ -23,11 +21,8 @@ object Slides: Subsystem() {
     val toSlideStop: Command
         get() = SetPower(slides, 0.0, this)
 
-override fun initialize() {
-    slide.direction = DcMotorSimple.Direction.REVERSE
-    slide2.direction = DcMotorSimple.Direction.REVERSE
-    slide.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-    slide2.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
-
-
-}}
+    override fun initialize() {
+        slide.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+        slide2.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
+    }
+}
