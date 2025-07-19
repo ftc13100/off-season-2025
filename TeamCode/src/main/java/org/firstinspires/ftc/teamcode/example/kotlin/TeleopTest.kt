@@ -1,26 +1,18 @@
 
-import com.rowanmcalpin.nextftc.core.Subsystem
-import com.rowanmcalpin.nextftc.core.command.Command
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand
-import com.rowanmcalpin.nextftc.core.control.controllers.PIDFController
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
-import com.rowanmcalpin.nextftc.ftc.hardware.controllables.RunToPosition
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
-import com.qualcomm.robotcore.hardware.DcMotorEx
 import com.qualcomm.robotcore.hardware.DcMotorSimple
 import com.rowanmcalpin.nextftc.core.command.groups.ParallelGroup
-import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup
-import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
-import com.rowanmcalpin.nextftc.ftc.gamepad.GamepadManager
 import org.firstinspires.ftc.teamcode.subsystems.Claw
-import org.firstinspires.ftc.teamcode.subsystems.Lift
+import org.firstinspires.ftc.teamcode.subsystems.Arm
+import org.firstinspires.ftc.teamcode.subsystems.Slides
 
 @TeleOp(name = "NextFTC Main TeleOp")
-class TeleOpProgram: NextFTCOpMode(Claw, Lift) {
+class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
 
     // Change the motor names to suit your robot.
     val frontLeftName = "leftFront"
@@ -64,21 +56,23 @@ class TeleOpProgram: NextFTCOpMode(Claw, Lift) {
         gamepadManager.gamepad2.a.pressedCommand = {Claw.open}
         gamepadManager.gamepad2.b.pressedCommand = {Claw.close}
 
-        gamepadManager.gamepad2.leftBumper.pressedCommand = {
-            ParallelGroup(
-                Lift.toHigh,
-                Lift.toHigh2
-            )
-        }
+        gamepadManager.gamepad2.leftBumper.pressedCommand = {Arm.toHigh}
+        gamepadManager.gamepad2.rightBumper.pressedCommand = {Arm.toLow}
+        gamepadManager.gamepad2.rightBumper.releasedCommand = {Arm.toStop}
+        gamepadManager.gamepad2.leftBumper.releasedCommand = {Arm.toStop}
 
-        gamepadManager.gamepad2.rightBumper.pressedCommand = {
-            ParallelGroup(
-                Lift.toLow,
-                Lift.toLow2
-            )
-        }
+        gamepadManager.gamepad2.dpadLeft.pressedCommand = {Slides.toSlideHigh}
+        gamepadManager.gamepad2.dpadRight.pressedCommand = {Slides.toSlideLow}
+        gamepadManager.gamepad2.dpadLeft.releasedCommand = {Slides.toSlideStop}
+        gamepadManager.gamepad2.dpadRight.releasedCommand = {Slides.toSlideStop}
 
-        this.telemetry.addData("Position", Lift.motor.currentPosition)
+
+
+
+    }
+
+    override fun onUpdate() {
+        this.telemetry.addData("Position", Arm.motor.currentPosition)
         this.telemetry.update()
     }
 }
