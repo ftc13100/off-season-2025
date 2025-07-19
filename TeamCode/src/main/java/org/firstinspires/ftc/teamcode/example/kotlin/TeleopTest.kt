@@ -43,6 +43,7 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         frontRightMotor.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         backRightMotor.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
 
+
         motors = arrayOf(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor)
     }
 
@@ -61,10 +62,10 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         gamepadManager.gamepad2.rightBumper.releasedCommand = {Arm.toStop}
         gamepadManager.gamepad2.leftBumper.releasedCommand = {Arm.toStop}
 
-        gamepadManager.gamepad2.dpadLeft.pressedCommand = {Slides.toSlideHigh}
-        gamepadManager.gamepad2.dpadRight.pressedCommand = {Slides.toSlideLow}
-        gamepadManager.gamepad2.dpadLeft.releasedCommand = {Slides.toSlideStop}
-        gamepadManager.gamepad2.dpadRight.releasedCommand = {Slides.toSlideStop}
+        gamepadManager.gamepad2.dpadDown.pressedCommand = {Slides.toSlideHigh}
+        gamepadManager.gamepad2.dpadUp.pressedCommand = {Slides.toSlideLow}
+        gamepadManager.gamepad2.dpadDown.releasedCommand = {Slides.toSlideStop}
+        gamepadManager.gamepad2.dpadDown.releasedCommand = {Slides.toSlideStop}
 
 
 
@@ -72,7 +73,7 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
     }
 
     override fun onUpdate() {
-        this.telemetry.addData("Position", Arm.motor.currentPosition)
+        this.telemetry.addData("Position", Arm.armMotor.currentPosition)
         this.telemetry.update()
     }
 }

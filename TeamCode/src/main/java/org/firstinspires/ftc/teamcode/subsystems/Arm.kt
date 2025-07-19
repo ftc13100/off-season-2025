@@ -12,9 +12,9 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower
 
 
 object Arm: Subsystem() {
-    val motor by lazy { MotorEx("leftSlideAxel") }
-    val motor2 by lazy { MotorEx("rightSlideAxel") }
-    val arms by lazy { MotorGroup(motor, motor2) }
+    val armMotor by lazy { MotorEx("leftSlideAxel") }
+    val armMotor2 by lazy { MotorEx("rightSlideAxel") }
+    val arms by lazy { MotorGroup(armMotor, armMotor2) }
 
     val controller = PIDFController(5.0, 0.0, 0.1, StaticFeedforward(0.0))
 
@@ -32,7 +32,7 @@ object Arm: Subsystem() {
 
 
     override fun initialize() {
-        motor2.direction = DcMotorSimple.Direction.REVERSE
+        armMotor2.direction = DcMotorSimple.Direction.REVERSE
     }
 
 
