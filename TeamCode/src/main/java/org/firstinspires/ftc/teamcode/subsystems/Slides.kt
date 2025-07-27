@@ -9,10 +9,9 @@ import com.rowanmcalpin.nextftc.ftc.hardware.controllables.SetPower
 
 
 object Slides: Subsystem() {
-    val slide by lazy { MotorEx("leftSlideString").reverse() }
-    val slide2 by lazy { MotorEx("rightSlideString") }
-    val slides by lazy { MotorGroup(slide, slide2) }
-
+    lateinit var slide: MotorEx
+    lateinit var slide2: MotorEx
+    lateinit var slides:  MotorGroup
 
     val toSlideHigh: Command
         get() = SetPower(slides, 0.8, this)
@@ -22,6 +21,9 @@ object Slides: Subsystem() {
         get() = SetPower(slides, 0.0, this)
 
     override fun initialize() {
+        slide = MotorEx("leftSlideString").reverse()
+        slide2 = MotorEx("rightSlideString")
+        slides = MotorGroup(slide, slide2)
         slide.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
         slide2.motor.zeroPowerBehavior = DcMotor.ZeroPowerBehavior.BRAKE
     }

@@ -2,16 +2,20 @@
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp
 import com.qualcomm.robotcore.hardware.DcMotor
 import com.qualcomm.robotcore.hardware.DcMotorSimple
+import com.rowanmcalpin.nextftc.core.command.groups.SequentialGroup
 import com.rowanmcalpin.nextftc.core.command.utility.InstantCommand
+import com.rowanmcalpin.nextftc.core.command.utility.delays.Delay
 import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
 import org.firstinspires.ftc.teamcode.subsystems.Arm
 import org.firstinspires.ftc.teamcode.subsystems.Claw
 import org.firstinspires.ftc.teamcode.subsystems.Slides
+import org.firstinspires.ftc.teamcode.subsystems.Wrist
+
 
 @TeleOp(name = "NextFTC Main TeleOp")
-class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
+class TeleOpProgram: NextFTCOpMode(Claw, Arm, Slides, Wrist) {
 
     // Change the motor names to suit your robot.
     val frontLeftName = "leftFront"
@@ -64,6 +68,15 @@ class TeleOpProgram: NextFTCOpMode(Claw, Arm) {
         gamepadManager.gamepad2.dpadDown.pressedCommand = { Slides.toSlideLow }
         gamepadManager.gamepad2.dpadUp.releasedCommand = { Slides.toSlideStop }
         gamepadManager.gamepad2.dpadDown.releasedCommand = { Slides.toSlideStop }
+
+        gamepadManager.gamepad2.dpadRight.pressedCommand = {
+        SequentialGroup(
+            Wrist.up,
+        )}
+        gamepadManager.gamepad2.dpadLeft.pressedCommand = {
+            SequentialGroup(
+                Wrist.down,
+            )}
 
 
 
