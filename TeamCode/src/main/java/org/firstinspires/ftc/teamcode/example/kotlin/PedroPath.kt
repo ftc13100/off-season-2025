@@ -52,15 +52,8 @@ class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
 
     val secondRoutine: Command
         get() = SequentialGroup(
-            ParallelGroup(
                 FollowPath(depositFirstSpec),
-                Arm.toHigh
-            ),
-            ParallelGroup(
-                Claw.open,
-            ),
-            Delay(1.0),
-            Arm.toLow
+                FollowPath(pushAndPick2)
         )
 
     override fun onInit() {
