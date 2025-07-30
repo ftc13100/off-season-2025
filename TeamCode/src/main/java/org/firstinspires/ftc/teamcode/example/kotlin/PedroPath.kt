@@ -25,19 +25,33 @@ class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
     private val startPose = Pose(8.0, 64.0, Math.toRadians(180.0))
     //specimens deposit
     private val depositPose = Pose(39.0, 64.0, Math.toRadians(180.0))
-    //get ready to push the 1 spec p1
-    private val pushPose1= Pose(47.93, 40.17, Math.toRadians(180.0))
-    private val pushPose1control= Pose(27.25, 40.18, Math.toRadians(180.0))
-    //get ready to push the 2 spec p2
-    private val pushPose2= Pose(64.24, 28.44, Math.toRadians(180.0))
-    private val pushPose2control= Pose(70.61, 40.97, Math.toRadians(180.0))
+    //get ready to push the 1 spec
+    private val pushPose1 = Pose(68.62, 15.71, Math.toRadians(180.0))
+    private val pushPose1control1 = Pose(23.07, 39.98, Math.toRadians(180.0))
+    private val pushPose1control2 = Pose(55.49, 36.80, Math.toRadians(180.0))
+    //push to obv zone
+    private val pickUp1and2 = Pose(21.28, 16.309, Math.toRadians(180.0))
+
+
+
+
+
 
 
 
 
     private lateinit var depositFirstSpec: PathChain
-    private lateinit var pushAndPick1: PathChain
-    private lateinit var pushAndPick2: PathChain
+    private lateinit var goToPushPose1: PathChain
+    private lateinit var push1: PathChain
+    private lateinit var depositSecondSpec: PathChain
+    private lateinit var depositThirdSpec: PathChain
+    private lateinit var gotoThirdSpec: PathChain
+
+
+
+
+
+
 
 
 
@@ -47,13 +61,25 @@ class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
             .setConstantHeadingInterpolation(startPose.heading)
             .build()
 
-        pushAndPick1 = follower.pathBuilder()
-            .addPath(BezierCurve(Point(depositPose), Point(pushPose1control), Point(pushPose1)))
-            .setLinearHeadingInterpolation(depositPose.heading, pushPose1.heading)
+        goToPushPose1 = follower.pathBuilder()
+            .addPath(BezierCurve(Point(depositPose), Point(pushPose1control1), Point(pushPose1control2), Point(pushPose1)))
+            .setConstantHeadingInterpolation(depositPose.heading)
             .build()
-        pushAndPick2 = follower.pathBuilder()
-            .addPath(BezierCurve(Point(pushPose1), Point(pushPose2control), Point(pushPose2)))
+        push1 = follower.pathBuilder()
+            .addPath(BezierLine(Point(pushPose1), Point(pickUp1and2)))
             .setConstantHeadingInterpolation(pushPose1.heading)
+            .build()
+        depositSecondSpec = follower.pathBuilder()
+            .addPath(BezierLine(Point(pickUp1and2), Point(depositPose)))
+            .setConstantHeadingInterpolation(pickUp1and2.heading)
+            .build()
+        gotoThirdSpec= follower.pathBuilder()
+            .addPath(BezierLine(Point(depositPose), Point(pickUp1and2)))
+            .setConstantHeadingInterpolation(depositPose.heading)
+            .build()
+        depositThirdSpec = follower.pathBuilder()
+            .addPath(BezierLine(Point(pickUp1and2), Point(depositPose)))
+            .setConstantHeadingInterpolation(pickUp1and2.heading)
             .build()
 
     }
@@ -65,7 +91,11 @@ class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
     val secondRoutine: Command
         get() = SequentialGroup(
                 FollowPath(depositFirstSpec),
-                FollowPath(pushAndPick2)
+                FollowPath(goToPushPose1),
+                FollowPath(push1),
+                FollowPath(depositSecondSpec),
+                FollowPath(gotoThirdSpec),
+                FollowPath(depositThirdSpec)
         )
 
     override fun onInit() {
