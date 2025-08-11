@@ -19,8 +19,8 @@ import org.firstinspires.ftc.teamcode.subsystems.Claw
 import org.firstinspires.ftc.teamcode.subsystems.Slides
 import org.firstinspires.ftc.teamcode.subsystems.Wrist
 
-@Autonomous(name = "NextFTC Autonomous Program 2 Kotlin")
-class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
+@Autonomous(name = "PedroPath")
+class PedroPath: PedroOpMode(Arm, Claw, Slides, Wrist) {
     //starting position
     private val startPose = Pose(8.0, 64.0, Math.toRadians(180.0))
     //specimens deposit
@@ -31,15 +31,6 @@ class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
     private val pushPose1control2 = Pose(55.49, 36.80, Math.toRadians(180.0))
     //push to obv zone
     private val pickUp1and2 = Pose(21.28, 16.309, Math.toRadians(180.0))
-
-
-
-
-
-
-
-
-
     private lateinit var depositFirstSpec: PathChain
     private lateinit var goToPushPose1: PathChain
     private lateinit var push1: PathChain
@@ -100,10 +91,9 @@ class PedroPath: PedroOpMode(Claw, Slides, Wrist, Arm) {
 
     override fun onInit() {
         follower = Follower(hardwareMap, FConstants::class.java, LConstants::class.java)
+        follower.setMaxPower(0.7)
         follower.setStartingPose(startPose)
         buildPaths()
-
-
     }
 
     override fun onStartButtonPressed() {
