@@ -13,16 +13,16 @@ import org.firstinspires.ftc.teamcode.example.kotlin.PedroPath
 
 
 object Slides: Subsystem() {
-    val controllerSlides = PIDFController(0.005, 0.0, 0.0, StaticFeedforward(0.0))
-
+    val controllerSlides = PIDFController(0.4, 0.0, 0.0, StaticFeedforward(0.1))
+        //get() = RunToPosition(slides, 1000.0, controllerSlides , this)
+        //how it would be done
     lateinit var slide: MotorEx
     lateinit var slide2: MotorEx
     lateinit var slides:  MotorGroup
 
     val toSlideHigh: Command
         get() = SetPower(slides, 0.8, this)
-    val toSlideHighPosition: Command
-        get() = RunToPosition(slides, 1000.0, controllerSlides , this)
+
     val toSlideLow: Command
         get() = SetPower(slides, -0.8, this)
     val toSlideStop: Command
