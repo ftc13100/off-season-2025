@@ -8,8 +8,8 @@ import com.rowanmcalpin.nextftc.ftc.NextFTCOpMode
 import com.rowanmcalpin.nextftc.ftc.driving.MecanumDriverControlled
 import com.rowanmcalpin.nextftc.ftc.hardware.controllables.MotorEx
 
-@TeleOp
-class DriveTeleop : NextFTCOpMode() {
+@TeleOp(name = "vroom vroom")
+class vroomvroom : NextFTCOpMode() {
     // Change the motor names to suit your robot.
     val frontLeftName = "leftFront"
     val frontRightName = "rightFront"
