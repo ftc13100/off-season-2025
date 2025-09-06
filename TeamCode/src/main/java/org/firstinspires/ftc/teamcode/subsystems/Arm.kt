@@ -19,6 +19,7 @@ object Arm: Subsystem() {                                                       
      //kotlin doesn't offer KS or KV or if it does its very complicated
     //kCos value was implemented but the cpr/ppr would need to be updated if the motor used for the arm was not in fact 30 rpm
     //    get() = RunToPosition(arms, 1000.0, controllerArm, this)
+
     val armMotor by lazy { MotorEx("leftSlideAxel") }
     val armMotor2 by lazy { MotorEx("rightSlideAxel") }
     val arms by lazy { MotorGroup(armMotor, armMotor2) }
