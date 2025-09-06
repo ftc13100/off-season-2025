@@ -47,6 +47,7 @@ class PedroPath: PedroOpMode(Arm, Claw, Slides, Wrist) {
 
 
     private fun buildPaths() {
+
         depositFirstSpec = follower.pathBuilder()
             .addPath(BezierLine(Point(startPose), Point(depositPose)))
             .setConstantHeadingInterpolation(startPose.heading)
